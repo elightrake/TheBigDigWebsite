@@ -8,7 +8,7 @@ people_df = pd.read_csv('Matching - People.csv')
 matches_df = pd.read_csv('Matching - Matches.csv')
 
 # Set the default number of matches to display
-num_matches = 1
+num_matches = 3
 
 def format_link(link):
     """Ensure the link starts with 'https://www.'."""
@@ -50,10 +50,10 @@ def result():
     # Get top matches for the user
     matches = []
     for i in range(1, num_matches + 1):
-        top_match_column = f'TopMatch{i}'
-        if top_match_column in matches_df.columns:
-            top_match_email = matches_df[matches_df['Email'] == email][top_match_column].values[0]
-            matches.append(get_match_details(top_match_email))
+        match_column = f'Match{i}'
+        if match_column in matches_df.columns:
+            match_email = matches_df[matches_df['Email'] == email][match_column].values[0]
+            matches.append(get_match_details(match_email))
 
     return render_template('result.html', matches=matches, num_matches=num_matches)
 
